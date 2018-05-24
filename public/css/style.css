@@ -33,20 +33,47 @@ body {
     bottom: 90px;
 }
 
-.game .page-menu .title {
+.game .title {
     color: #fff;
     position: absolute;
     width: 260px;
-    left: 32px;
     font-size: 2.2em;
-    top: 30px;
-    text-shadow: 2px 2px 10px #ffee66aa;
+    text-shadow: 2px 2px 10px #e60080;
+    line-height: 1.4em;
 }
 
-.game .button.button-hit{
-    width: 130px;
-    left: 10px;
-    bottom: 10px;
+.game .page-menu .title {
+    left: 32px;
+    top: 30px;
+}
+
+.game .button.button-select{
+    width: 85px;
+    font-size: 15px;
+    bottom: 60px;
+}
+.game .button.button-select.button-select-1{
+    left: 52px;
+}
+.game .button.button-select.button-select-2{
+    left: 200px;
+}
+.game .button.button-select.button-select-3{
+    left: 350px;
+}
+.game .button.button-select.button-select-4{
+    left: 494px;
+}
+.game .button.button-select.button-select-5{
+    left: 640px;
+}
+
+.game .page-game .title {
+    width: 600px;
+    top: 40px;
+    left: 100px;
+    text-shadow: 2px 2px 10px #093f3f;
+    text-align: center;
 }
 
 .game .button.button-replay{

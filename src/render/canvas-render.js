@@ -1,16 +1,22 @@
 "use strict";
 
-import RenderInterface from './../render-interface.js';
-import EventManager from './../../event/event-manager.js';
+import RenderInterface from './render-interface.js';
+import EventManager from './../event/event-manager.js';
 
-import {GAME_WIDTH, GAME_HEIGHT} from './../../config.js';
+import {GAME_WIDTH, GAME_HEIGHT} from './../config.js';
 
-import ImageExplosion from './object/explosion.js';
-import ImageHit from './object/hit.js';
+import ImageClassExplosion from './object/explosion.js';
+import ImageClassRocket from './object/rocket.js';
+import ImageClassBackground from './object/background.js';
+import ImageClassFire from './object/fire.js';
 
-//let imageQueenBee = new ImageQueenBee();
-//let imageDroneBee = new ImageDroneBee();
-//let imageWorkerBee = new ImageWorkerBee();
+const imageRockets = [];
+for (let i = 1; i <= 5; i++) {
+    imageRockets.push(new ImageClassRocket(i));
+}
+
+const ImageBg01 = new ImageClassBackground('02');
+const ImgFire = new ImageClassFire();
 
 export default class CanvasRender extends RenderInterface {
 
@@ -22,12 +28,13 @@ export default class CanvasRender extends RenderInterface {
         this.time = new Date();
         this.canvas = canvas;
         this.context = canvas.getContext('2d');
+        this.renderBgElements = [];
         this.renderElements = [];
         //
         //EventManager.event(EVENT_BEE_IS_DEAD, (bee) => {
         //    this.renderElements.push({
         //        type: 'explosion',
-        //        image: new ImageExplosion(),
+        //        image: new ImageClassExplosion(),
         //        position: bee.getPosition(Date.now())
         //    });
         //});
@@ -62,23 +69,41 @@ export default class CanvasRender extends RenderInterface {
     }
 
     /**
-     * @param {Logic} logic
+     * @param {Game} Game
      */
-    render(logic) {
+    render(Game) {
+        const rockets = Game.getRockets();
+        console.log(rockets);
+
+        this.renderBgElements.push(
+            {
+                type: 'background',
+                image: ImageBg01,
+                position: {x:400, y:300}
+            }
+        );
+
         let render = EventManager.requestAnimationFrame((time) => {
             let stop = true;
             this._clear();
-            let bees = logic.getBees();
-            if (bees.length) {
+            if (this.renderBgElements.length) {
                 stop = false;
-                for (let i = 0; i < bees.length; i += 1) {
-                    this._renderBee(time, bees[i]);
+                for (let i = 0; i < this.renderBgElements.length; i += 1) {
+                    if (!this._renderElement(time, this.renderBgElements[i])) {
+                        this.renderBgElements.splice(i--, 1);
+                    }
+                }
+            }
+            if (rockets.length) {
+                stop = false;
+                for (let rocket of rockets) {
+                    this._renderRocket(time, rocket);
                 }
             }
             if (this.renderElements.length) {
                 stop = false;
                 for (let i = 0; i < this.renderElements.length; i += 1) {
-                    if (this._renderElement(time, this.renderElements[i])) {
+                    if (!this._renderElement(time, this.renderElements[i])) {
                         this.renderElements.splice(i--, 1);
                     }
                 }
@@ -97,64 +122,32 @@ export default class CanvasRender extends RenderInterface {
         this.context.translate(element.position.x, element.position.y);
         let result = element.image.render(this.context, time);
         this.context.restore();
-        return !result;
+        return result;
     }
 
     /**
      * @param {number} time
-     * @param {BeeInterface} bee
+     * @param {Rocket} Rocket
      * @private
      */
-    _renderBee(time, bee) {
-        let position = bee.getPosition(time);
-        let rotate = bee.getRotate(time);
-
-        let imageBee;
-
-        if (bee instanceof QueenBee) {
-            imageBee = imageQueenBee;
-        } else if (bee instanceof WorkerBee) {
-            imageBee = imageWorkerBee;
-        } else if (bee instanceof DroneBee) {
-            imageBee = imageDroneBee;
-        } else {
-            throw new Error('Image for bee is not found');
-        }
+    _renderRocket(time, Rocket) {
+        let position = Rocket.getPosition(time);
+        let rotate = Rocket.getRotate(time);
 
         let angle = rotate * (Math.PI / 180);
         this.context.save();
         this.context.translate(position.x, position.y);
         this.context.rotate(angle);
-        imageBee.render(this.context, time);
+        imageRockets[Rocket.getNum()].render(this.context, time);
+        if (Rocket.getIsRunned()) {
+            this.context.translate(2, 72);
+            ImgFire.render(this.context, time);
+        }
         this.context.restore();
 
         this.context.save();
         this.context.translate(position.x, position.y);
-        this._renderBeeHealt(bee, imageBee);
         this.context.restore();
-    }
-
-    /**
-     * @param {BeeInterface} bee
-     * @param {ImageClass} imageBee
-     * @private
-     */
-    _renderBeeHealt(bee, imageBee) {
-        let health = bee.getHealth() / bee.getMaxHealth();
-        let y = imageBee.getScale() * imageBee.getHeight() * 0.40;
-
-        let w = bee.getMaxHealth() / 2;
-        let l = bee.getHealth() / 2;
-
-        this.context.fillStyle = '#ffffff';
-        this.context.fillRect(-w / 2 - 1, y - 1, w + 2, 7);
-
-        this.context.fillStyle = '#eb212e';
-        this.context.globalAlpha = 0.25;
-        this.context.fillRect(-w / 2, y, w, 5);
-
-        this.context.globalAlpha = 1;
-        this.context.fillRect(-w / 2, y, l, 5);
     }
 
 }

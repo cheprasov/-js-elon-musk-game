@@ -3,8 +3,8 @@
 export default class RenderInterface {
 
     /**
-     * @param {Logic} logic
+     * @param {Game} Game
      */
-    render(logic) {}
+    render(Game) {}
 
 }

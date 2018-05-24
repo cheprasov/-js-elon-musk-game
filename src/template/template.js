@@ -5,7 +5,12 @@ let template = `
 
         <div class="page page-game">
             <canvas class="game-canvas"></canvas>
-            <button class="button button-hit js-game-hit-bee">Hit Bee</button>
+            <div class="title">Make a bet.<br>In which of the rockets should the car be loaded?</div>
+            <button class="button button-select button-select-1 js-game-select" data-id="0">select</button>
+            <button class="button button-select button-select-2 js-game-select" data-id="1">select</button>
+            <button class="button button-select button-select-3 js-game-select" data-id="2">select</button>
+            <button class="button button-select button-select-4 js-game-select" data-id="3">select</button>
+            <button class="button button-select button-select-5 js-game-select" data-id="4">select</button>
         </div>
 
         <div class="page page-results">
