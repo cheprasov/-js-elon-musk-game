@@ -9,7 +9,7 @@ export default class Explosion extends ImageClass {
             image: 'imgs/explosion.png',
             width: 100,
             height: 100,
-            scale: 1,
+            scale: 2,
             loop: 1,
             sprites: {
                 grid: {cols: 9, rows: 8},

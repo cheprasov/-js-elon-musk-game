@@ -4,11 +4,11 @@ import ImageClass from './image-class.js';
 
 export default class Background extends ImageClass {
 
-    constructor(num) {
+    constructor(num, width = 800, height = 600) {
         super({
-            image: `imgs/bg${num}.jpg`,
-            width: 800,
-            height: 600
+            image: `imgs/${num}`,
+            width,
+            height
         });
     }
 

@@ -23,8 +23,12 @@ body {
     background-size: 100%;
 }
 
-.game .page.page-results {
-    background: rgba(0, 0, 0, .55) url(./../imgs/win.gif) center 40% no-repeat;
+.game .page.page-fail {
+    background: url(./../imgs/fail.gif) center 40% no-repeat, url(./../imgs/bg03.jpg);
+}
+
+.game .page.page-win {
+    background: url(./../imgs/win.jpg) center 48% no-repeat, url(./../imgs/bg03.jpg);
 }
 
 .game .button.button-start{
@@ -68,7 +72,9 @@ body {
     left: 640px;
 }
 
-.game .page-game .title {
+.game .page-game .title,
+.game .page-fail .title,
+.game .page-win .title {
     width: 600px;
     top: 40px;
     left: 100px;
@@ -81,10 +87,6 @@ body {
     left: 50%;
     margin-left: -100px;
     bottom: 100px;
-}
-
-.game .game-canvas {
-    background: url(./../imgs/bg2.jpg) center center no-repeat;
 }
 
 .button {

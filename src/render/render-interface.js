@@ -7,4 +7,10 @@ export default class RenderInterface {
      */
     render(Game) {}
 
+    /**
+     * @param {Game} Game
+     */
+    update(Game) {}
+
+    clear() {}
 }

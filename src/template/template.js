@@ -1,20 +1,33 @@
 "use strict";
 
-let template = `
+export const title = 'Make a bet.<br>In which of the rockets should the car be loaded?';
+
+export const template = `
     <div class="game">
 
         <div class="page page-game">
             <canvas class="game-canvas"></canvas>
-            <div class="title">Make a bet.<br>In which of the rockets should the car be loaded?</div>
-            <button class="button button-select button-select-1 js-game-select" data-id="0">select</button>
-            <button class="button button-select button-select-2 js-game-select" data-id="1">select</button>
-            <button class="button button-select button-select-3 js-game-select" data-id="2">select</button>
-            <button class="button button-select button-select-4 js-game-select" data-id="3">select</button>
-            <button class="button button-select button-select-5 js-game-select" data-id="4">select</button>
+            <div class="title"></div>
+            <div class="buttons">
+                <button class="button button-select button-select-1 js-game-select" data-id="0">select</button>
+                <button class="button button-select button-select-2 js-game-select" data-id="1">select</button>
+                <button class="button button-select button-select-3 js-game-select" data-id="2">select</button>
+                <button class="button button-select button-select-4 js-game-select" data-id="3">select</button>
+                <button class="button button-select button-select-5 js-game-select" data-id="4">select</button>
+            </div>
         </div>
 
-        <div class="page page-results">
+        <div class="page page-win">
+            <div class="title">
+                Congratulations!<br>Elon Musk prouds of you!
+            </div>
             <button class="button button-replay js-game-play">Replay</button>
+        </div>
+        <div class="page page-fail">
+            <div class="title">
+                Ooops... your rocket was crashed!
+            </div>
+            <button class="button button-replay js-game-play">Try again</button>
         </div>
 
         <div class="page page-menu">
@@ -22,6 +35,8 @@ let template = `
                 Help Elon Musk to made history launching a car to Mars
             </div>
             <button class="button button-start js-game-play">Play</button>
+            <img src="imgs/explosion.png" width="1" height="1" />
+            <img src="imgs/asteroid.png" width="1" height="1" />
         </div>
 
         <div class="sounds" style="display: none">
@@ -82,6 +97,3 @@ let template = `
         </div>
     </div>
 `;
-
-export default template;
-
