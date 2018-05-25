@@ -1,4 +1,4 @@
-# The Bee Game
+# Elon Musk Game
 
 ## About
 The game based on a small exercise special for Gamesys.
