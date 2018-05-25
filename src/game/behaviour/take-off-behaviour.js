@@ -23,6 +23,11 @@ export default class TakeOffBehaviour extends FlyBehaviour {
         this.rotate = this._getAngle(this.position.y, this.position.x, this.destPosition.y, this.destPosition.x);
     }
 
+    _getDelta(time) {
+        let d = super._getDelta(time);
+        return d * d;
+    }
+
     /**
      * @param {number} time
      * @private

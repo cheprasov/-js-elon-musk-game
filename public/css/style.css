@@ -46,6 +46,14 @@ body {
     line-height: 1.4em;
 }
 
+.game .title2 {
+    color: #ad0055;
+    top: 248px;
+    left: 34px;
+    width: 300px;
+    position: absolute;
+}
+
 .game .page-menu .title {
     left: 32px;
     top: 30px;
@@ -53,7 +61,8 @@ body {
 
 .game .button.button-select{
     width: 85px;
-    font-size: 15px;
+    font-size: 14px;
+    padding: 5px 0;
     bottom: 60px;
 }
 .game .button.button-select.button-select-1{

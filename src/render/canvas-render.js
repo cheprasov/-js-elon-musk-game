@@ -2,6 +2,7 @@
 
 import RenderInterface from './render-interface.js';
 import EventManager from './../event/event-manager.js';
+import Landing2Behaviour from './../game/behaviour/landing2-behaviour.js';
 
 import {GAME_WIDTH, GAME_HEIGHT} from './../config.js';
 import {EVENT_ROCKET_DESTROYED} from './../game/game.js';
@@ -133,7 +134,7 @@ export default class CanvasRender extends RenderInterface {
                         image: new ImageClassAsteroid(),
                         position: {
                             x: Rocket.getPosition(Date.now()).x,
-                            y: 350
+                            y: 250
                         }
                     });
                     Game.setTimeout(()=> {
@@ -185,7 +186,7 @@ export default class CanvasRender extends RenderInterface {
         this.context.rotate(angle);
         this.context.scale(position.z, position.z);
         imageRockets[Rocket.getNum()].render(this.context, time);
-        if (Rocket.getIsRunned()) {
+        if (Rocket.getIsRunned() && !(Rocket.getBehaviour() instanceof Landing2Behaviour)) {
             this.context.translate(2, 72);
             ImgFire.render(this.context, time);
         }

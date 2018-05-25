@@ -134,7 +134,14 @@ export default class Game {
     }
 
     _getRockets() {
-        let destroys = [null, DESTROY_ON_START, DESTROY_BY_ASTEROID, DESTROY_BY_ASTEROID, DESTROY_ON_LANDING];
+        let destroys = [null];
+        let rnd = [DESTROY_ON_START, DESTROY_BY_ASTEROID, DESTROY_ON_LANDING];
+
+        while (destroys.length < 5) {
+            let r = Math.round(Math.random() * (rnd.length - 1));
+            destroys.push(rnd[r]);
+        }
+
         destroys.sort(() => Math.random() * 100 - 50).sort(() => Math.random() * 100 - 50);
 
         const rockets = [];
@@ -184,6 +191,7 @@ export default class Game {
         for (let R of this.rockets) {
             /** @type {Rocket} R **/
             if (!R.getDestroyId()) {
+                // for devel
                 //id = R.getNum();
             }
         }

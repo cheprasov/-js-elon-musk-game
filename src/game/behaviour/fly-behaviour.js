@@ -17,7 +17,7 @@ export default class FlyBehaviour extends BehaviourInterface {
         };
         this.destPosition = {
             x: this.position.x,
-            y: 300,
+            y: 200,
             z: .8
         };
         this.rotate = this._getAngle(this.position.y, this.position.x, this.destPosition.y, this.destPosition.x);
@@ -59,12 +59,16 @@ export default class FlyBehaviour extends BehaviourInterface {
         return angle;
     }
 
+    _getDelta(time) {
+        return  Math.min((time - this.time) / this.period, 1);
+    }
+
     /**
      * @inheritDoc
      */
     getPosition(time) {
         let dest = this._getDestPosition(time);
-        let delta = Math.min((time - this.time) / this.period, 1);
+        let delta = this._getDelta(time);
 
         return {
             x : this.position.x + (dest.x - this.position.x) * delta,

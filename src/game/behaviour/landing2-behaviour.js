@@ -16,8 +16,8 @@ export default class Landing2Behaviour extends FlyBehaviour {
             z: position.z,
         };
         this.destPosition = {
-            x: 470,
-            y: 50,
+            x: 400 + Math.random() * 100 - 50,
+            y: 50 + Math.random() * 100 - 50,
             z: 0
         };
         this.rotate = this._getAngle(this.position.y, this.position.x, this.destPosition.y, this.destPosition.x);
@@ -29,5 +29,13 @@ export default class Landing2Behaviour extends FlyBehaviour {
      */
     _getDestPosition(time) {
         return this.destPosition;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    getRotate(time) {
+        let delta = this._getDelta(time);
+        return this.rotate + 90 + delta * delta * delta * 720;
     }
 }

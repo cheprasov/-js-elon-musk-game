@@ -42,6 +42,13 @@ export default class Rocket {
         this.Behaviour = Behaviour;
     }
 
+    /**
+     * @return {BehaviourInterface}
+     */
+    getBehaviour() {
+        return this.Behaviour;
+    }
+
     setIsRunned(isRunned) {
         return this.isRunned = isRunned;
     }
