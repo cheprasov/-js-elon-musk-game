@@ -19,6 +19,7 @@ Alexander Cheprasov
 - I did not write js tests for code, sorry. I know that is worst practise.
 - Optimization for web (minification for js and css, sprites for images, compression for images and mp3)
 - More smooth behaviour for rockets.
+- Use WebGL for render (pixi.js).
 - More browsers for test. I have tested the game only on Chrome, Firefox and Safari.
 
 ## How to run
